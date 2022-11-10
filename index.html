@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waltes!</title>
+    <link rel="stylesheet" href="styles.css">
+
+
+      <link rel="icon" type="image/x-icon" href="/Logo.png">
+
+    <script defer src="index.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+<body>
+
+<!-- <div id="initialScreen">
+
+    <div class="d-flex">
+        <h1> Welcome to Waltes!</h1>
+
+        <button 
+        type="submit"
+        class="btn"
+        id="newGameButton" >
+        
+            Create New Game!
+        
+         </button>
+         <div> OR </div>
+
+         <div class="form-group">
+            <input type="text" placeholder="Enter Game Code" id="gameCodeInput"/> 
+         
+         </div>
+
+         
+        <button 
+        type="submit"
+        class="btn"
+        id="joinGameButton" >
+        
+        Join Game!
+        
+         </button>
+         
+</div>
+ 
+</div>
+
+ -->
+
+<div id="wrapper-flex" >
+
+
+    <div id="player-seat-left">
+    
+        <header id="player1-header">Player 1</header>
+        <img class= "player" src="Player1.png" style="height: 80px;">
+
+
+        <div id="stick-container1" >
+
+
+        </div>
+        
+        <div id="button-container">
+                <button id="shake-button"  onclick="shake()">Click me</button>
+
+        </div>
+
+
+    </div>
+
+
+ 
+    <div id="plate"> 
+
+
+    <div id="turn-tracker">
+    
+    
+    
+    </div>
+
+
+
+  <div id="plate-top-container">
+    
+  
+
+
+        <img id= "star" src="Star.png" alt="">
+
+        <img id= "dice0" src="flat.png" alt="">
+        <img id= "dice1" src="flat.png" alt="">
+        <img id= "dice2" src="flat.png" alt="">
+        <img id= "dice3" src="flat.png" alt="">
+        <img id= "dice4" src="flat.png" alt="">
+
+        <img id= "bowl-img" src="Plate.png" alt="">
+
+   
+</div>
+
+
+        <div id="total-sticks-container">
+
+            <div id="tsc-normalStick">
+                <img class="total-sticks-container" src="Point.png" alt="">
+
+                <div id="tsc-normalStick-counter">          </div>
+            </div>
+
+
+            <div id="tsc-oldLadyStick">  
+            
+            <img class="total-sticks-container" src="OldLady.png" alt="">
+
+                <div id="tsc-oldLadyStick-counter">         </div>
+            </div>
+
+
+            <div id="tsc-oldManStick"> 
+            
+            <img class="total-sticks-container" src="OldMan.png" alt="">
+            <br>
+                <div id="tsc-oldManStick-counter">          </div>
+            </div>
+
+        </div>
+              
+</div> 
+
+
+    <div id="player-seat-right">         
+    
+
+    <header id="player2-header">Player 2</header>
+
+    <img class= "player" src="Player2.png" style="height: 80px;">
+
+     <div id="stick-container2" >
+    
+
+
+     <div id="button-container">
+
+            <button id="shake-button"  onclick="shake()">Click me</button>
+
+    </div>
+
+     
+
+
+    </div>
+
+</div>
+
+</div>
+
+
+
+
+    
+</body>
+</html>
