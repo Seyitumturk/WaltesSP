@@ -79,31 +79,37 @@ console.log("Welcome to Waltes");
 
 //  }
 
+// Global vars
+
+
 
 var clicks = 0; 
 
 let player1_score  = 0; 
 let player2_score = 0;  
 
+
 let player1_oldlady_count = 0;
 let player2_oldlady_count = 0;
+
+
+let player1_oldMan_count = 0;
+let player2_oldMan_count = 0;
 
 let player1_Waltes = false;
 let player2_Waltes = false;
 
-let totalNormalStickCount = 51;
-let totalOldLadyCount = 3;
-let totalOldManCount = 1; 
+let remainingSticks = 17;
+let remainingLadySticks = 3; 
+let oldManStick = 1;
+
 
 
 function shake(){
 
 
 
-
 clicks += 1; 
-
-  
 
 console.log(clicks);
 
@@ -119,6 +125,22 @@ const dice6 = Math.floor(Math.random() * 2);
 let dice_sum = dice1 + dice2 + dice3 + dice4 + dice5 + dice6; 
 
 
+let pointImage = document.createElement("img");
+pointImage.id ="point-img"
+pointImage.src = "Point.png";
+
+let ladyPointImage = document.createElement("img");
+ladyPointImage.id ="ledy-point-img"
+ladyPointImage.src = "OldLady.png";
+
+let manPointImage = document.createElement("img");
+manPointImage.id ="man-point-img"
+manPointImage.src = "OldMan.png";
+
+
+
+// Element creation 
+
 const scoreTable1 = document.getElementById("player1-header");
 const scoreTable2 = document.getElementById("player2-header");
 const turnTracker = document.getElementById("turn-tracker");
@@ -126,99 +148,97 @@ const turnTracker = document.getElementById("turn-tracker");
 const stickContainerOne = document.getElementById("stick-container1")
 const stickContainerTwo = document.getElementById("stick-container2")
 
+const pointStickCounter = document.getElementById("pointDivCounter");
+const ladyStickCounter = document.getElementById("ladyDivCounter");
+const oldManStickCounter = document.getElementById("oldManDivCounter");
 
-let pointImage = document.createElement("img");
-pointImage.src = "Point.png";
 
-let ladyPointImage = document.createElement("img");
-ladyPointImage.src = "OldLady.png";
+const winTextContainer = document.getElementById("winText");
 
-let manPointImage = document.createElement("img");
-manPointImage.src = "OldMan.png";
-
-let leftArrowImage = document.createElement('img')
-leftArrowImage.src = "/arrow-left.png"
-leftArrowImage.style = "width: 10vw;"
-
-let rightArrowImage = document.createElement('img')
-rightArrowImage.src = "/arrow-right.png"
-rightArrowImage.style = "width: 10vw;"
+pointStickCounter.innerHTML = remainingSticks;
+ladyStickCounter.innerHTML = remainingLadySticks;
+oldManStickCounter.innerHTML = oldManStick;
 
 
 
+winTextContainer.textContent = "Lorem Ipsum is simply dummy text "   ;
+
+
+setTimeout(gapDelay, 500)
+
+
+function gapDelay(){
+   winTextContainer.innerText = " ";
+
+}
 
 // Determining the turn with turn tracker. 
 
-// Trying to append and remove arrow images - pick up/
-
 if (modulus_val == 0 ) {
 
-      turnTracker.innerHTML = " Player 2's Turn";
+   turnTracker.innerHTML = " Player 1's Turn: "
 
 }
 else{
-
-      turnTracker.innerHTML = " Player 1's Turn";
+      turnTracker.innerHTML = " Player 2's Turn: "
 
 }
-
-//Append the total stick counts 
-
-totalNormalStickCountElm = document.getElementById("tsc-normalStick-counter");
-totalNormalStickCountElm.innerHTML = totalNormalStickCount; 
-
-
-totaloldLadyCountElm = document.getElementById("tsc-oldLadyStick-counter");
-totaloldLadyCountElm.innerHTML = totalOldLadyCount;
-
-totaloldManCountElm = document.getElementById("tsc-oldManStick-counter");
-totaloldManCountElm.innerHTML = totalOldManCount;
-            
-
-
 
 // Normal waltes for P2 
 if (modulus_val == 0 && (dice_sum == 5 || dice_sum == 1)){
 
-   stickContainerTwo.appendChild(pointImage)
 
-   turnTracker.innerText = "Player 2 Waltes! ";
-
+   remainingSticks -= 1;
    player2_score += 3;
 
-    setTimeout(clearText, 2000)
+   player2_Waltes = true; 
+   console.log(player2_Waltes)
 
-   function clearText(){
-      turnTracker.innerText = "Player 1's Turn ";
+   stickContainerTwo.appendChild(pointImage)
+
+   winTextContainer.innerText = " PLAYER 2 WALTES!";
+
+   setTimeout(waitForIt, 1000);
+
+   function waitForIt(){
+      winTextContainer.innerText = " ";
+
    }
 
-   
-   player2_Waltes = true; 
 
-   totalNormalStickCount = totalNormalStickCount -1;
+}else{
+   player2_Waltes = false; 
+   console.log(player2_Waltes)
 
 
 }
 //Normal waltes for P1 
  if (modulus_val !== 0 && (dice_sum == 5 || dice_sum == 1)){
 
+
+   remainingSticks -= 1;
    player1_score += 3;
+
    player1_Waltes = true;
+   console.log(player1_Waltes)
+
 
    stickContainerOne.appendChild(pointImage)
-   
-   turnTracker.innerText = "Player 1 Waltes! ";
+
+   winTextContainer.innerText = "PLAYER 1 WALTES!";
+
+   setTimeout(waitForIt, 1000);
+
+   function waitForIt(){
+      winTextContainer.innerText = " ";
 
 
-   setTimeout(clearText, 2000)
-
-   function clearText(){
-      turnTracker.innerText = "Player 2's turn";
    }
 
-   totalNormalStickCount = totalNormalStickCount -1;
+} else{
+   player1_Waltes = false; 
+   console.log(player1_Waltes)
 
-   
 
 }
 
@@ -228,17 +248,12 @@ if (modulus_val == 0 && (dice_sum == 6 || dice_sum == 0)){
 
    player2_score += 5;
    player2_oldlady_count += 1;
+   remainingLadySticks -= 1;
+
    window.alert("PLAYER 2 WALTES -- OLD LADY !!!" )
 
+
    player2_Waltes = true; 
-
-   setTimeout(clearText, 2000)
-
-   function clearText(){
-      turnTracker.innerText = " ";
-   }
-
-   totalOldLadyCount = totalOldLadyCount -1;
 
    stickContainerTwo.appendChild(ladyPointImage)
 
@@ -250,15 +265,16 @@ if (modulus_val !== 0 && (dice_sum == 6 || dice_sum == 0)){
 
    player1_score += 5;
    player1_oldlady_count += 1;
+   remainingLadySticks -= 1;
+
    window.alert("PLAYER 1 WALTES  -- OLD LADY !!!")
 
    player1_Waltes = true; 
 
    stickContainerOne.appendChild(ladyPointImage)
-   totalOldLadyCount = totalOldLadyCount -1;
-
 
 }
+
 
 console.log("Line");
 
@@ -284,24 +300,30 @@ if(dice1 == 1) {
    dice0_element.src = "Flat.png";
 }
 
+
 if(dice1 == 0) {
    dice0_element.src = "Star.png";
 }
 
+
 if(dice2 == 1) {
    dice1_element.src = "Flat.png";
 }
+
 if(dice2 == 0) {
    dice1_element.src = "Star.png";
 }
+
 
 if(dice3 == 1) {
   dice2_element.src = "Flat.png";
 }
 
+
 if(dice3 == 0) {
   dice2_element.src = "Star.png";
 }
+
 
 if(dice4 == 1) {
   dice3_element.src  = "Flat.png";
@@ -328,8 +350,13 @@ if(dice6 == 0) {
 }
 
 
-scoreTable1.innerHTML = "Kisika: " + player1_score + " Kisikuwiskak " + player1_oldlady_count;
-scoreTable2.innerHTML = "Kisika: " + player2_score + " Kisikuwiskak " + player2_oldlady_count;
-return {dice1, dice2, dice3, dice4, dice5, dice6};
+
+
+scoreTable1.innerHTML = "Score: " + player1_score + " Ladies " + player1_oldlady_count;
+scoreTable2.innerHTML = "Score: " + player2_score + " Ladies " + player2_oldlady_count;
+return {dice1, dice2, dice3, dice4, dice5, dice6, pointStickCounter, ladyStickCounter, oldManStickCounter};
 
 }
+
+
+
